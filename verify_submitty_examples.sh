@@ -4,8 +4,9 @@
 find . -type d -name __pycache__ -prune -exec rm -rf {} \;
 
 # Run the submitty test for each submission
-for i in $(ls -d */); 
+for i in */ 
 do 
+  [[ -d "$i" ]] || break
   echo "Running ${i}"; 
 
   cd "${i}" || exit
