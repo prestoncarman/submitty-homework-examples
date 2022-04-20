@@ -1,0 +1,3 @@
+[codespell]
+skip = *.png,*.po,./.git/*,*.jpg,*.o,node_modules
+ignore-words=.codespellignore

@@ -7,6 +7,8 @@ do
   echo ${i}; 
 done
 
+cd python_pytest
+
 # Copy over test files and submission
 rm -rf tmp
 
@@ -16,7 +18,7 @@ cp submissions/solution/* tmp/
 
 # Execute test
 cd tmp
-python3 test_submitty.py 1> output.txt 2> error.txt
+pipenv run python test_submitty.py 1> output.txt 2> error.txt
 status=$?
 if [[ $status -eq 0 ]]
 then
