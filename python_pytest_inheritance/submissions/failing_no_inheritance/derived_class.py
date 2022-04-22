@@ -1,4 +1,4 @@
-class DerivedClass():
+class DerivedClass:
     def __str__(self):
         return "DerivedClass(BaseClass)"
 

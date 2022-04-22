@@ -47,7 +47,7 @@ do
 
     else 
 
-      # Expecte successful submission
+      # Expected successful submission
       if [[ $status -eq 0 ]]
       then
         echo "   * Successful - Confirmed solution"
