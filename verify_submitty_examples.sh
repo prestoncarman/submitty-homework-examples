@@ -5,18 +5,18 @@ find . -type d -name __pycache__ -prune -exec rm -rf {} \;
 find . -type d -name .pytest_cache -prune -exec rm -rf {} \;
 
 # Check each example
-for i in */ 
+for example in */ 
 do 
-  [[ -d "$i" ]] || break
-  echo "Running ${i} example"; 
+  [[ -d "$example" ]] || break
+  echo "Running ${example} example"; 
 
-  cd "${i}" || exit
+  cd "${example}" || exit
 
   # Run the submitty test for each submission
-  for i in submissions/*/ 
+  for submission in submissions/*/ 
   do 
-    [[ -d "$i" ]] || break
-    echo " - Check submission ${i}"; 
+    [[ -d "$submission" ]] || break
+    echo " - Check submission ${submission}"; 
 
 
     # Copy over test files and submission
@@ -24,14 +24,14 @@ do
 
     mkdir tmp
     cp config/test_input/* tmp/
-    cp "${i}"* tmp/
+    cp "${submission}"* tmp/
 
     # Execute test
     cd tmp || exit
     pipenv run python test_submitty.py 1> output.txt 2> error.txt
     status=$?
 
-    if [[ $i == *"failing"* ]]
+    if [[ $submission == *"failing"* ]]
     then
 
       # Expected failing submission
