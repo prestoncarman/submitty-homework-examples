@@ -5,7 +5,9 @@ import submission
 
 
 def test_hello_world():
-    assert submission.hello_world() == "Hello World!"
+    assert (
+        submission.hello_world() == "Hello World!"
+    ), "Function return does not match expected"
 
 
 if __name__ == "__main__":
