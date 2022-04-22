@@ -7,25 +7,7 @@
   "testcases": [
     {
       "title": "Test Submission",
-      "command": "python3 submitty.py",
-      "points": 1,
-      "validation": [
-        {
-          "method": "diff",
-          "description": "Pytest Success",
-          "actual_file": "STDERR.txt",
-          "expected_file": "pytest_stderr.txt"
-        },
-        {
-          "method": "errorIfEmpty",
-          "description": "Pytest Output",
-          "actual_file": "STDOUT.txt"
-        }
-      ]
-    },
-    {
-      "title": "Test Submission With Alternate Pet Class",
-      "command": "python3 submitty_extends_test.py",
+      "command": "python3 test_submitty.py",
       "points": 1,
       "validation": [
         {
