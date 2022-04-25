@@ -6,4 +6,9 @@ The test check for correctly implementing a `DerivedClass` that should extend th
 
 * Check inherits `BaseClass`
 * Check returned string of `__str__()`
-* Check returned string of `__str__()` using an alternate `BaseClass` with a different return string in `__str__()`
+* Check returned string of `__str__()` using an alternate method sting
+
+## Solutions
+
+Provided two possible solutions, one using `super().__str__()` and one using our mangled variable name ("cheating").
+The cheating method could be prevented by using an alternate `BaseClass` implementation for testing.
