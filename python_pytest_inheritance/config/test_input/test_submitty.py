@@ -1,4 +1,3 @@
-import importlib
 import sys
 
 import base_class
@@ -22,12 +21,11 @@ def test_extends__str__():
 
 
 def test_alternate_base_extends__str__():
-    # Swap out BaseClass for alternate
-    del sys.modules["base_class"]
-    sys.modules["base_class"] = __import__("base_class_alternate")
-    importlib.reload(derived_class)
-
     test_object = derived_class.DerivedClass()
+
+    # Swap out base class behavior
+    test_object._change_test("BaseClassAlternate")
+
     result = test_object.__str__()
 
     assert (
