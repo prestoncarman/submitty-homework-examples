@@ -23,8 +23,8 @@ do
     rm -rf tmp
 
     mkdir tmp
-    cp config/test_input/* tmp/
     cp "${submission}"* tmp/
+    cp config/test_input/* tmp/
 
     # Execute test
     cd tmp || exit
