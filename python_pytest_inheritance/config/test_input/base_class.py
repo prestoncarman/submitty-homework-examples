@@ -1,3 +1,6 @@
+# See solution for assignment supplied `BaseClass`
+#
+# This version of `BaseClass` is used for testing to allow for alternate `__str__()` text
 class BaseClass:
     def __init__(self):
         self.__test = "BaseClass"
@@ -7,7 +10,3 @@ class BaseClass:
 
     def __str__(self):
         return self.__test
-
-    # Version of __str__() supplied with assignment
-    # def __str__(self):
-    #     return "BaseClass"

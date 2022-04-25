@@ -6,7 +6,7 @@ The test check for correctly implementing a `DerivedClass` that should extend th
 
 * Check inherits `BaseClass`
 * Check returned string of `__str__()`
-* Check returned string of `__str__()` using an alternate method sting
+* Check returned string of `__str__()` using an alternate method string
 
 ## Solutions
 
