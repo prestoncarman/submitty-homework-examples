@@ -9,4 +9,4 @@ The test checks for correctly using `math.sqrt()` method from the `math` library
 
 ## Solutions
 
-Provided a solution simple solution.
+Provided a simple solution.

@@ -3,10 +3,12 @@ import unittest
 from unittest.mock import patch
 
 import pytest
+# Student code is in submission
 import submission
 
 
 class TestMock(unittest.TestCase):
+    # Set up a mock for math.sqrt in the student submission.py file
     @patch("submission.math.sqrt")
     def test_sqrt_method_calls(self, mock_math):
         # Alternate return for sqrt mock method
