@@ -4,7 +4,7 @@ import pytest
 
 
 def test_hello_world(capsys):
-    import submission
+    import submission  # noqa: F401
 
     captured = capsys.readouterr()
     assert captured.out == "Hello World!\n", "Function return does not match expected"
