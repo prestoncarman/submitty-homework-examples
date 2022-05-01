@@ -3,8 +3,7 @@ import unittest
 from unittest.mock import patch
 
 import pytest
-# Student code is in submission
-import submission
+import submission  # Student code is in submission
 
 
 class TestMock(unittest.TestCase):
