@@ -1,5 +1,3 @@
-import unittest
-
 import code_for_student_to_test
 
 

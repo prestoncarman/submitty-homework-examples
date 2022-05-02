@@ -2,7 +2,6 @@ import importlib
 import sys
 import unittest
 
-import code_for_student_to_test
 import pytest
 import student_tests
 
