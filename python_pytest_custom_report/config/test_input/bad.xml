@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.035" timestamp="2022-05-02T22:14:07.863137" hostname="carmpr-XPS-13-7390"><testcase classname="test_submitty" name="Function prints 'Hello World!'" time="0.009"><failure message="AssertionError: Function return does not match expected&#10;assert 'Hello' == 'Hello World!'&#10;  - Hello World!&#10;  + Hello">test_submitty.py:9: in test_hello_world
+    assert (
+E   AssertionError: Function return does not match expected
+E   assert 'Hello' == 'Hello World!'
+E     - Hello World!
+E     + Hello</failure></testcase></testsuite></testsuites>
