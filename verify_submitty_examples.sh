@@ -59,6 +59,26 @@ do
       fi
     fi
 
+    # Custom validation output check
+    if  [[ -f "custom_validation.py" ]]
+    then
+      actual_file="cv_output.txt"
+      expected_file="custom_validation_stdout.txt"
+
+      pipenv run python custom_validation.py 1> cv_output.txt 2> cv_error.txt
+
+      diff "$actual_file" "$expected_file"
+      status=$?
+
+      if [[ $status -ne 0 ]]
+      then
+        printf 'The actual file ("%s") is different from expected ("%s")\n' "$actual_file" "$expected_file"
+        exit $status
+      else
+        echo "   * Successful - Confirmed custom validation result"
+      fi
+    fi
+
     # clean up
     cd .. || exit
     rm -rf tmp

@@ -1,0 +1,5 @@
+Tests
+----------------------------------------
+1. PASS   Function returns 'Hello World!'
+2. PASS   Function returns a string of 12 characters
+3. PASS   Function returns string that starts with 'H'
