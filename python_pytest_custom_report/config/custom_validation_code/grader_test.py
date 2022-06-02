@@ -1,6 +1,7 @@
-import grader
 import os
 from unittest.mock import patch
+
+import grader
 
 
 def test_log_line():
@@ -98,4 +99,3 @@ def test_grade_pytest_results(mock_sys_exit):
         os.remove("validation_results.json")
 
     # mock_sys_exit.assert_called_with(0)
-

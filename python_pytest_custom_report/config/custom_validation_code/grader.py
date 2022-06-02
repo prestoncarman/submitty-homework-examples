@@ -1,10 +1,13 @@
 """
-This file presents an example of a python custom validator connected with a pytest gradeable for use in your Submitty assignment.
-Building on the Submitty example: https://github.com/Submitty/Submitty/tree/main/more_autograding_examples/python_custom_validation
+This file presents an example of a python custom validator connected with a pytest gradeable
+for use in your Submitty assignment. Building on the Submitty example:
+    https://github.com/Submitty/Submitty/tree/main/more_autograding_examples/python_custom_validation
 
-While the example assignment is printing "Hello World!", the custom validation could be used for any pytest XML output file.
+While the example assignment is printing "Hello World!", the custom validation could be used
+for any pytest XML output file.
 
-To test that the pytest XML output, the grade_submitty.py creates a pytest_results.xml file to be processed by the custom validator.
+To test that the pytest XML output, the grade_submitty.py creates a pytest_results.xml file
+to be processed by the custom validator.
 
 To read this file, begin at the bottom with do_the_grading, then progress to
 grade_a_single_file. If you are interested, you may also examine the return_result
@@ -259,20 +262,6 @@ def get_pytest_results(tests):
         failures += 0 if test["result"] else 1
         results += "{}. {}   {}\n".format(test_num, pass_fail, test["name"])
     return results
-
-
-def grade_pytest_results(tests):
-    test_num = 0
-    failures = 0
-    results = f'Tests\n{"-" * 40}\n'
-    for test in tests:
-        test_num += 1
-        pass_fail = "PASS" if test["result"] else "FAIL"
-        failures += 0 if test["result"] else 1
-        results += "{}. {}   {}\n".format(test_num, pass_fail, test["name"])
-    score = 0 if failures > 0 else 1
-    status = "failure" if failures > 0 else "success"
-    return_result(score, results, status)
 
 
 def grade_pytest_results(tests):
