@@ -29,7 +29,7 @@ if __name__ == "__main__":
             "--junitxml=pytest_results.xml",
             "--tb=short",
             "--no-header",
-            "test_submitty.py",
+            "grade_submitty.py",
         ]
     )
     print(exit_code, file=sys.stderr)

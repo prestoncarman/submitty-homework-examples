@@ -1,11 +1,11 @@
 import unittest
 
-import code_for_student_to_test
+import code_for_student
 
 
 class Student_Tests(unittest.TestCase):
     def test_output(self):
-        result = code_for_student_to_test.hello_world()
+        result = code_for_student.hello_world()
         self.assertEqual(result, "Not Expected Answer")
 
 

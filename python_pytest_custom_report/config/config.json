@@ -7,18 +7,12 @@
   "testcases": [
     {
       "title": "Test Submission",
-      "command": "python3 test_submitty.py",
+      "command": "python3 grade_submitty.py",
       "points": 1,
       "validation": [
         {
-          "method": "diff",
-          "description": "Pytest Success",
-          "actual_file": "STDERR.txt",
-          "expected_file": "pytest_stderr.txt"
-        },
-        {
-          "method": "errorIfEmpty",
-          "description": "Pytest Output",
+          "method": "custom_validator",
+          "command": "python3 custom_validation.py",
           "actual_file": "STDOUT.txt"
         }
       ]
