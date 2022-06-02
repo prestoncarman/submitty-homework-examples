@@ -25,10 +25,14 @@ do
     mkdir tmp
     cp "${submission}"* tmp/
     cp config/test_input/* tmp/
+    if  [[ -d "config/custom_validation_code" ]]
+    then
+      cp config/custom_validation_code/grader.py tmp/
+    fi
 
     # Execute test
     cd tmp || exit
-    pipenv run python test_submitty.py 1> output.txt 2> error.txt
+    pipenv run python grade_submitty.py 1> output.txt 2> error.txt
     status=$?
 
     if [[ $submission == *"failing"* ]]
@@ -60,12 +64,12 @@ do
     fi
 
     # Custom validation output check
-    if  [[ -f "custom_validation.py" ]]
+    if  [[ -f "grader.py" ]]
     then
       actual_file="cv_output.txt"
       expected_file="custom_validation_stdout.txt"
 
-      pipenv run python custom_validation.py 1> cv_output.txt 2> cv_error.txt
+      pipenv run python grader.py 1> cv_output.txt 2> cv_error.txt
 
       diff "$actual_file" "$expected_file"
       status=$?

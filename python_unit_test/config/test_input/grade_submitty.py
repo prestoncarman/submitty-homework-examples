@@ -1,7 +1,7 @@
 import sys
 import unittest
 
-import code_for_student_to_test
+import code_for_student
 import pytest
 import student_tests
 
@@ -12,14 +12,14 @@ def test_using_unittest():
 
 def main():
     failure_count = 0
-    exit_code = pytest.main(["--tb=short", "--no-header", "test_submitty.py"])
+    exit_code = pytest.main(["--tb=short", "--no-header", "grade_submitty.py"])
     if int(exit_code.value) != 0:
         failure_count += 1
 
     print("\nRunning Student Tests (Expect Success)")
     print("." * 70)
 
-    code_for_student_to_test.set_return_value("Hello World!")
+    code_for_student.set_return_value("Hello World!")
 
     # run expected successful test
     result = unittest.main(
@@ -34,7 +34,7 @@ def main():
     print("." * 70)
 
     # Reload the test code
-    code_for_student_to_test.set_return_value("Goodbye!")
+    code_for_student.set_return_value("Goodbye!")
 
     # run expected failing test
     result = unittest.main(

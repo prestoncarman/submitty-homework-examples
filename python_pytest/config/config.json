@@ -7,7 +7,7 @@
   "testcases": [
     {
       "title": "Test Submission",
-      "command": "python3 test_submitty.py",
+      "command": "python3 grade_submitty.py",
       "points": 1,
       "validation": [
         {

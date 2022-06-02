@@ -11,6 +11,6 @@ def test_hello_world():
 
 
 if __name__ == "__main__":
-    exit_code = pytest.main(["--tb=short", "--no-header", "test_submitty.py"])
+    exit_code = pytest.main(["--tb=short", "--no-header", "grade_submitty.py"])
     print(exit_code, file=sys.stderr)
     sys.exit(int(exit_code.value))
