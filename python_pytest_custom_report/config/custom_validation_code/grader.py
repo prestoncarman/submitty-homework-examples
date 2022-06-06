@@ -16,11 +16,9 @@ functions and the get_actual_files and get_pytest_results helper function or you
 If you are interested in parsing command line arguments, examine the parse_args function.
 """
 
-import argparse
 import json
 import os
 import sys
-import traceback
 import xml.etree.ElementTree as ET
 
 """
