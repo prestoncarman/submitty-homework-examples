@@ -29,23 +29,6 @@ value 'testcase_prefix', which denotes the testcase that is to be processed.
 GLOBAL_INPUT_JSON_PATH = "custom_validator_input.json"
 
 
-# def parse_args():
-#     """
-#     A simple argument parsing function.
-
-#     This function is not necessary, but can be used as a template to help process command line arguments.
-#     """
-#     parser = argparse.ArgumentParser()
-#     parser.add_argument(
-#         "-n",
-#         "--numbers",
-#         required=True,
-#         help="The number of numbers we expect",
-#         type=int,
-#     )
-#     return parser.parse_args()
-
-
 class ValidationResults:
     def __init__(self):
         self.score = 1
@@ -142,45 +125,6 @@ def return_error(error_message):
     vr.write_file_error(error_message)
     # End the program, because we have returned a result.
     sys.exit(0)
-
-
-# def get_actual_files():
-#     """
-#     A helper function written to load in actual files.
-
-#     To find actual files, we look for all of the files listed in the
-#     'actual_file' section of this validator.
-#     """
-#     try:
-#         # Open the custom_validator_input.json that we specified in our config.
-#         with open(GLOBAL_INPUT_JSON_PATH) as json_file:
-#             testcase = json.load(json_file)
-#             # Grab the folder housing the files.
-#             prefix = testcase["testcase_prefix"]
-#     except Exception:
-#         return_error("Could not open custom_validator_input.json")
-
-#     # There can be either one actual file (a string) or a list of actual files.
-
-#     # If there is only one actual file (a string)
-#     if isinstance(testcase["actual_file"], str):
-#         # The actual file is the prefix (test##) + the filename
-#         #  (e.g. test01/my_file.txt)
-#         actual_file = [
-#             os.path.join(prefix, testcase["actual_file"]),
-#         ]
-#         # Add the actual file to the actual file list.
-#         actual_files = list(actual_file)
-#     else:
-#         # If there are many actual files (a list of them), iterate over them and
-#         # append them all to the actual file list.
-#         actual_files = list()
-#         for file in testcase["actual_file"]:
-#             # The actual file is the prefix (test##) + the filename
-#             #  (e.g. test01/my_file.txt)
-#             actual_files.append(os.path.join(prefix, file))
-#     # Return a list of all the actual files.
-#     return actual_files
 
 
 def parse_pytest_xml(xmlfile):
