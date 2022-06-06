@@ -1,0 +1,20 @@
+{
+    "status": "success",
+    "data": {
+        "score": 1,
+        "message": [
+            {
+                "message": "Function returns 'Hello World!'",
+                "status": "success"
+            },
+            {
+                "message": "Function returns a string of 12 characters",
+                "status": "success"
+            },
+            {
+                "message": "Function returns string that starts with 'H'",
+                "status": "success"
+            }
+        ]
+    }
+}
