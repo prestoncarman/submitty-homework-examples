@@ -66,8 +66,8 @@ do
     # Custom validation output check
     if  [[ -f "grader.py" ]]
     then
-      actual_file="cv_output.txt"
-      expected_file="custom_validation_stdout.txt"
+      actual_file="validation_results.json"
+      expected_file="validation_results_expected.json"
 
       pipenv run python grader.py 1> cv_output.txt 2> cv_error.txt
 

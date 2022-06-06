@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+    <testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.053" timestamp="2022-06-01T20:35:50.301413" hostname="carmpr-XPS-13-7390">
+        <testcase classname="grade_submitty" name="Function returns 'Hello World!'" time="0.011">
+            <failure message="AssertionError: Function return does not match expected value&#10;assert 'Goodbye!' == 'Hello World!'&#10;  - Hello World!&#10;  + Goodbye!">grade_submitty.py:9: in test_hello_world
+    assert (
+E   AssertionError: Function return does not match expected value
+E   assert 'Goodbye!' == 'Hello World!'
+E     - Hello World!
+E     + Goodbye!</failure>
+        </testcase>
+        <testcase classname="grade_submitty" name="Function returns a string of 12 characters" time="0.001">
+            <failure message="AssertionError: Function return does not match expected string length&#10;assert 8 == 12&#10; +  where 8 = len('Goodbye!')&#10; +    where 'Goodbye!' = &lt;function hello_world at 0x7f230271e280&gt;()&#10; +      where &lt;function hello_world at 0x7f230271e280&gt; = submission.hello_world">grade_submitty.py:16: in test_hello_world_length
+    assert (
+E   AssertionError: Function return does not match expected string length
+E   assert 8 == 12
+E    +  where 8 = len('Goodbye!')
+E    +    where 'Goodbye!' = &lt;function hello_world at 0x7f230271e280&gt;()
+E    +      where &lt;function hello_world at 0x7f230271e280&gt; = submission.hello_world</failure>
+        </testcase>
+        <testcase classname="grade_submitty" name="Function returns string that starts with 'H'" time="0.001">
+            <failure message="AssertionError: Function return does not start with 'H'&#10;assert 'G' == 'H'&#10;  - H&#10;  + G">grade_submitty.py:23: in test_hello_world_first_character
+    assert submission.hello_world()[0] == "H", "Function return does not start with 'H'"
+E   AssertionError: Function return does not start with 'H'
+E   assert 'G' == 'H'
+E     - H
+E     + G</failure>
+        </testcase>
+    </testsuite>
+</testsuites>

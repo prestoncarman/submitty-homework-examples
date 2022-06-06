@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="3" time="0.022" timestamp="2022-06-01T20:37:47.771939" hostname="carmpr-XPS-13-7390">
+    <testcase classname="grade_submitty" name="Function returns 'Hello World!'" time="0.008" />
+    <testcase classname="grade_submitty" name="Function returns a string of 12 characters" time="0.001" />
+    <testcase classname="grade_submitty" name="Function returns string that starts with 'H'" time="0.001" />
+  </testsuite>
+</testsuites>

@@ -1,5 +1,0 @@
-Tests
-----------------------------------------
-1. FAIL   Function returns 'Hello World!'
-2. FAIL   Function returns a string of 12 characters
-3. FAIL   Function returns string that starts with 'H'
