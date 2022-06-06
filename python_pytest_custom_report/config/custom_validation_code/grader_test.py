@@ -18,7 +18,8 @@ def test_log_line():
 
 @patch("sys.exit")
 def test_return_result(mock_sys_exit):
-    expected_json = '{\n    "status": "success",\n    "data": {\n        "score": 1,\n        "message": "done",\n        "status": "success"\n    }\n}'
+    expected_json = '{\n    "status": "success",\n    '
+    expected_json += '"data": {\n        "score": 1,\n        "message": "done",\n        "status": "success"\n    }\n}'
 
     grader.return_result(1, "done", "success")
     with open("validation_results.json") as jsonfile:
@@ -88,7 +89,8 @@ def test_print_result_pass():
 @patch("sys.exit")
 def test_grade_pytest_results(mock_sys_exit):
     pytest_object = [{"name": "Test 1", "result": True}]
-    expected_json = '{\n    "status": "success",\n    "data": {\n        "score": 1,\n        "message": "Test 1",\n        "status": "success"\n    }\n}'
+    expected_json = '{\n    "status": "success",\n    "data": {\n        '
+    expected_json += '"score": 1,\n        "message": "Test 1",\n        "status": "success"\n    }\n}'
 
     grader.grade_pytest_results(pytest_object)
     with open("validation_results.json") as jsonfile:
