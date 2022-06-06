@@ -185,56 +185,6 @@ def return_error(error_message):
 #     return actual_files
 
 
-# def grade_a_single_file(file, number_of_numbers):
-#     """
-#     For a file and a number of numbers, see if they sum correctly.
-#     """
-#     try:
-#         with open(file) as f:
-#             # Read in all of the lines of the file (there is one number on each line)
-#             numbers = f.readlines()
-#         # Remove newlines/spaces from all lines of the file.
-#         numbers = [x.strip() for x in numbers]
-#         # The last line of the file is of the form "total = #" so we split with space as our delimiter.
-#         numbers[-1] = numbers[-1].split()
-
-#         # Make sure that the last line had 'total' in it.
-#         if "total" not in numbers[-1]:
-#             return_result(
-#                 score=0, message="ERROR: total is not included", status="failure"
-#             )
-
-#         # The last line was of the form "total = #". We split earlier, and now we
-#         # remove everything but the number.
-#         numbers[-1] = numbers[-1][-1]
-#         # Convert all of the numbers we read in from string to int.
-#         numbers = [int(x) for x in numbers]
-
-#         # Make sure that the 0 to n-1th numbers sum to the nth number.
-#         if sum(numbers[:-1]) != numbers[-1]:
-#             # If they do not, return zero credit with an error message.
-#             return_result(
-#                 score=0,
-#                 message="ERROR: The numbers do not sum correctly",
-#                 status="failure",
-#             )
-#         elif len(numbers[:-1]) != number_of_numbers:
-#             # If they do sum correctly, make sure that we have the desired number of numbers.
-#             return_result(
-#                 score=0,
-#                 message="ERROR: Incorrect number of numbers ({0} instead of {1})".format(
-#                     len(numbers[:-1]), number_of_numbers
-#                 ),
-#                 status="failure",
-#             )
-#     except Exception:
-#         return_result(
-#             score=0, message="ERROR: Could not open output file.", status="failure"
-#         )
-#     # If no exception occurred and the numbers sum, return them so that we can do one last processing step.
-#     return numbers
-
-
 def parse_pytest_xml(xmlfile):
     tree = ET.parse(xmlfile)
     root = tree.getroot()
@@ -282,54 +232,11 @@ def grade_pytest_results(tests):
 
 
 def do_the_grading():
-    """
-    Process a number of runs of the student program to make sure that
-      1) All runs resulted in a correct output.
-      2) All runs were different (and therefore were likely random).
-    """
-
-    # try:
-    #     # Parse command line arguments. In this assignment, this is how we learn
-    #     # how many numbers the student was supposed to sum together.
-    #     args = parse_args()
-    # except Exception:
-    #     # If we can't parse the command line arguments, we must have done something
-    #     # wrong, so we'll return a failure message.
-    #     return_error(message="ERROR: Incorrect arguments to custom validator")
-    # number_of_numbers = args.numbers
-
-    tests = parse_pytest_xml("pytest_results.xml")
-    grade_pytest_results(tests)
-
-    # # Grab all of the files we are supposed to check.
-    # actual_files = get_actual_files()
-
-    # # This variable will hold the numbers summed in the previous file. That way,
-    # # we will be able to check that they are different in the next run.
-    # prev_data = None
-
-    # # For every student file
-    # for file in actual_files:
-    #     log_line("Processing " + file)
-
-    #     # Make sure that the output in the file sums correctly
-    #     data = grade_a_single_file(file, number_of_numbers)
-    #     # If we are on the first file, save the this output so that we can check that the next
-    #     # run is different (random).
-    #     if prev_data is None:
-    #         prev_data = data
-    #     else:
-    #         # If two runs of the student program yield the same random output, then the program
-    #         # is probably not actually random, so return partial credit
-    #         if data == prev_data:
-    #             return_result(
-    #                 score=0.6, message="ERROR: Program is not random.", status="failure"
-    #             )
-    # # If we make it all the way to the end, the student had the correct output and it was random,
-    # # so return full credit.
-    # return_result(
-    #     score=1.0, message="Success: numbers summed correctly.", status="success"
-    # )
+    try:
+        tests = parse_pytest_xml("pytest_results.xml")
+        grade_pytest_results(tests)
+    except Exception:
+        return_error("Pytest with custom validation failed")
 
 
 if __name__ == "__main__":
