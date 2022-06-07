@@ -82,7 +82,7 @@ class ValidationResults:
 
     def write_file_error(self, error_message):
         result = {
-            "status": "fail",
+            "status": "failure",
             "message": error_message,
         }
         self.write_file(result)
@@ -127,19 +127,68 @@ def return_error(error_message):
     sys.exit(0)
 
 
-def parse_pytest_xml(xmlfile):
-    tree = ET.parse(xmlfile)
-    root = tree.getroot()
+def get_actual_files():
+    """
+    A helper function written to load in actual files.
 
+    To find actual files, we look for all of the files listed in the
+    'actual_file' section of this validator.
+    """
+    try:
+        # Open the custom_validator_input.json that we specified in our config.
+        with open(GLOBAL_INPUT_JSON_PATH) as json_file:
+            testcase = json.load(json_file)
+            # Grab the folder housing the files.
+            prefix = testcase["testcase_prefix"]
+    except Exception:
+        return_error("Could not open custom_validator_input.json")
+
+    # There can be either one actual file (a string) or a list of actual files.
+
+    # If there is only one actual file (a string)
+    if isinstance(testcase["actual_file"], str):
+        # The actual file is the prefix (test##) + the filename
+        #  (e.g. test01/my_file.txt)
+        actual_file = [
+            os.path.join(prefix, testcase["actual_file"]),
+        ]
+        # Add the actual file to the actual file list.
+        actual_files = list(actual_file)
+    else:
+        # If there are many actual files (a list of them), iterate over them and
+        # append them all to the actual file list.
+        actual_files = list()
+        for file in testcase["actual_file"]:
+            # The actual file is the prefix (test##) + the filename
+            #  (e.g. test01/my_file.txt)
+            actual_files.append(os.path.join(prefix, file))
+    # Return a list of all the actual files.
+    return actual_files
+
+
+def parse_pytest_xml(files):
     tests = []
-    for testsuites_element in root:
-        for testsuite_element in testsuites_element:
 
-            test = {"name": testsuite_element.attrib["name"], "result": True}
-            for child in testsuite_element:
-                if child.tag == "failure":
-                    test["result"] = False
-            tests.append(test)
+    xml_files = [s for s in files if ".xml" in s]
+    for xml_file in xml_files:
+        tree = ET.parse(xml_file)
+        root = tree.getroot()
+
+        for testsuites_element in root:
+            for testsuite_element in testsuites_element:
+
+                test = {"name": testsuite_element.attrib["name"], "result": "success"}
+                for child in testsuite_element:
+                    if child.tag == "failure":
+                        test["result"] = "failure"
+                tests.append(test)
+
+    # TODO remove pytest running time from output
+    # output_files = [s for s in files if "STDOUT" in s]
+    # for output in output_files:
+    #     with open(output) as output_file:
+    #         test = {"name": output_file.read(), "result": "information"}
+    #         tests.append(test)
 
     return tests
 
@@ -150,7 +199,7 @@ def get_pytest_results(tests):
     results = f'Tests\n{"-" * 40}\n'
     for test in tests:
         test_num += 1
-        pass_fail = "PASS" if test["result"] else "FAIL"
+        pass_fail = "PASS" if test["result"] == "success" else "FAIL"
         failures += 0 if test["result"] else 1
         results += "{}. {}   {}\n".format(test_num, pass_fail, test["name"])
     return results
@@ -161,21 +210,20 @@ def grade_pytest_results(tests):
     failures = 0
     vr = ValidationResults()
 
-    # results = f'Tests\n{"-" * 40}\n'
     for test in tests:
         test_num += 1
-        status = "success" if test["result"] else "failure"
-        failures += 0 if test["result"] else 1
-        # results += "{}. {}   {}\n".format(test_num, pass_fail, test["name"])
-        vr.add_message(test["name"], status)
+        failures += 0 if test["result"] == "success" else 1
+        vr.add_message(test["name"], test["result"])
+
     score = 0 if failures > 0 else 1
     vr.set_score(score)
     vr.write_file_success()
 
 
 def do_the_grading():
+    files = get_actual_files()
     try:
-        tests = parse_pytest_xml("pytest_results.xml")
+        tests = parse_pytest_xml(files)
         grade_pytest_results(tests)
     except Exception:
         return_error("Pytest with custom validation failed")

@@ -28,11 +28,12 @@ do
     if  [[ -d "config/custom_validation_code" ]]
     then
       cp config/custom_validation_code/grader.py tmp/
+      cp config/custom_validation_code/custom_validator_input.json tmp/
     fi
 
     # Execute test
     cd tmp || exit
-    pipenv run python grade_submitty.py 1> output.txt 2> error.txt
+    pipenv run python grade_submitty.py 1> STDOUT.txt 2> STDERR.txt
     status=$?
 
     if [[ $submission == *"failing"* ]]
@@ -44,7 +45,7 @@ do
         echo "   * Successful - Found incorrect submission"
       else
         echo "   --- Failed to find error ---"
-        cat output.txt 
+        cat STDOUT.txt 
         echo "   --- Failed to find error ---"
         exit 1
       fi
@@ -57,7 +58,7 @@ do
         echo "   * Successful - Confirmed solution"
       else
         echo "   --- Failed solution ---"
-        cat output.txt 
+        cat STDOUT.txt 
         echo "   --- Failed solution ---"
         exit 1
       fi

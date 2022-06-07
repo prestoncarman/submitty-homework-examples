@@ -1,14 +1,7 @@
 ---
-# This is the name of the workflow, visible on GitHub UI
 name: Check Spelling
 
-on:
-  push:
-    branches-ignore: 
-      - main
-  pull_request:
-    branches: 
-      - main
+on: [push, pull_request]
 
 jobs:
   build:
