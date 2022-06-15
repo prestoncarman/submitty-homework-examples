@@ -12,8 +12,11 @@
       "validation": [
         {
           "method": "custom_validator",
-          "command": "python3 custom_validation.py",
-          "actual_file": "STDOUT.txt"
+          "command": "python3 grader.py",
+          "actual_file": [
+            "STDOUT.txt",
+            "pytest_results.xml"
+          ]
         }
       ]
     }
