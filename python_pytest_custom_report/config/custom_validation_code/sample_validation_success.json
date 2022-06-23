@@ -2,7 +2,7 @@
     "status": "success",
     "data": {
         "score": 1,
-        "message": "Test 1: PASS - Test 1",
+        "message": "Test 1: PASS - My test 1 name",
         "status": "success"
     }
 }

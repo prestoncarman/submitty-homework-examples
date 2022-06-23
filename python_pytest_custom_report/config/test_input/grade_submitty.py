@@ -8,7 +8,7 @@ def test_hello_world(record_xml_attribute):
     record_xml_attribute("name", "Function returns 'Hello World!'")
     assert (
         submission.hello_world() == "Hello World!"
-    ), "Function return does not match expected value"
+    ), 'submission.hello_world() == "Hello World!"'
 
 
 def test_hello_world_length(record_xml_attribute):

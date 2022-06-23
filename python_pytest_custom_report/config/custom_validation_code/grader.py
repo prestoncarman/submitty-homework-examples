@@ -127,7 +127,7 @@ def return_error(error_message):
     sys.exit(0)
 
 
-def get_actual_files():
+def get_actual_files(config_path):
     """
     A helper function written to load in actual files.
 
@@ -136,7 +136,7 @@ def get_actual_files():
     """
     try:
         # Open the custom_validator_input.json that we specified in our config.
-        with open(GLOBAL_INPUT_JSON_PATH) as json_file:
+        with open(config_path) as json_file:
             testcase = json.load(json_file)
             # Grab the folder housing the files.
             prefix = testcase["testcase_prefix"]
@@ -200,7 +200,7 @@ def get_pytest_results(tests):
     for test in tests:
         test_num += 1
         pass_fail = "PASS" if test["result"] == "success" else "FAIL"
-        failures += 0 if test["result"] else 1
+        failures += 0 if test["result"] == "success" else 1
         results += "{}. {}   {}\n".format(test_num, pass_fail, test["name"])
     return results
 
@@ -212,8 +212,10 @@ def grade_pytest_results(tests):
 
     for test in tests:
         test_num += 1
+        pass_fail = "PASS" if test["result"] == "success" else "FAIL"
         failures += 0 if test["result"] == "success" else 1
-        vr.add_message(test["name"], test["result"])
+        result = "Test {}: {} - {}".format(test_num, pass_fail, test["name"])
+        vr.add_message(result, test["result"])
 
     score = 0 if failures > 0 else 1
     vr.set_score(score)
@@ -221,7 +223,7 @@ def grade_pytest_results(tests):
 
 
 def do_the_grading():
-    files = get_actual_files()
+    files = get_actual_files(GLOBAL_INPUT_JSON_PATH)
     try:
         tests = parse_pytest_xml(files)
         grade_pytest_results(tests)

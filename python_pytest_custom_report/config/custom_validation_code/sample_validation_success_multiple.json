@@ -1,0 +1,16 @@
+{
+    "status": "success",
+    "data": {
+        "score": 1,
+        "message": [
+            {
+                "message": "Test 1: PASS - My test 1 name",
+                "status": "success"
+            },
+            {
+                "message": "Test 2: PASS - My test 2 name",
+                "status": "success"
+            }
+        ]
+    }
+}
