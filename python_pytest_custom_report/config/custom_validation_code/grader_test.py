@@ -73,7 +73,6 @@ def test_parse_pytest_xml_fail():
     actual = grader.parse_pytest_xml(
         ["python_pytest_custom_report/config/custom_validation_code/sample_failure.xml"]
     )
-    print(actual)
     assert actual == expected
 
 
@@ -102,6 +101,52 @@ def test_print_result_pass():
     assert (
         actual == "Tests\n----------------------------------------\n1. PASS   Test 1\n"
     ), "Single successful test does not return expected output"
+
+
+def test_submitty_config():
+    actual = grader.get_actual_files(
+        "python_pytest_custom_report/config/custom_validation_code/custom_validator_input.json"
+    )
+    print(actual)
+    assert actual == [
+        "STDOUT.txt",
+        "pytest_results.xml",
+    ], "Parsing custom_validator_input.json does not return expected output"
+
+
+def test_submitty_result_pass():
+    tests = [{"name": "My test 1 name", "result": "success"}]
+    grader.grade_pytest_results(tests)
+
+    with open("validation_results.json") as actual_file:
+        with open(
+            "python_pytest_custom_report/config/custom_validation_code/sample_validation_success.json"
+        ) as expected_file:
+            assert actual_file.read() == expected_file.read()
+
+    # Test clean up
+    if os.path.exists("validation_results.json"):
+        os.remove("validation_results.json")
+    pass
+
+
+def test_submitty_result_pass_multiple():
+    tests = [
+        {"name": "My test 1 name", "result": "success"},
+        {"name": "My test 2 name", "result": "success"},
+    ]
+    grader.grade_pytest_results(tests)
+
+    with open("validation_results.json") as actual_file:
+        with open(
+            "python_pytest_custom_report/config/custom_validation_code/sample_validation_success_multiple.json"
+        ) as expected_file:
+            assert actual_file.read() == expected_file.read()
+
+    # Test clean up
+    if os.path.exists("validation_results.json"):
+        os.remove("validation_results.json")
+    pass
 
 
 @patch("sys.exit")
