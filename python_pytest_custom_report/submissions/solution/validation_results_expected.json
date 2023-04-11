@@ -4,15 +4,15 @@
         "score": 1,
         "message": [
             {
-                "message": "Function returns 'Hello World!'",
+                "message": "Test 1: PASS - Function returns 'Hello World!'",
                 "status": "success"
             },
             {
-                "message": "Function returns a string of 12 characters",
+                "message": "Test 2: PASS - Function returns a string of 12 characters",
                 "status": "success"
             },
             {
-                "message": "Function returns string that starts with 'H'",
+                "message": "Test 3: PASS - Function returns string that starts with 'H'",
                 "status": "success"
             }
         ]
