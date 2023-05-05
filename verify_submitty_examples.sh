@@ -4,35 +4,38 @@
 find . -type d -name __pycache__ -prune -exec rm -rf {} \;
 find . -type d -name .pytest_cache -prune -exec rm -rf {} \;
 
+temp="tmp"
+
 # Check each example
-for example in */ 
+for example in ./examples/*;
 do 
+  echo "Checking ${example}"; 
   [[ -d "$example" ]] || break
   echo "Running ${example} example"; 
 
   cd "${example}" || exit
 
   # Run the submitty test for each submission
-  for submission in submissions/*/ 
-  do 
+  for submission in submissions/*/;
+  do
     [[ -d "$submission" ]] || break
     echo " - Check submission ${submission}"; 
 
-
     # Copy over test files and submission
-    rm -rf tmp
+    rm -rf ${temp}
 
-    mkdir tmp
-    cp "${submission}"* tmp/
-    cp config/test_input/* tmp/
+    mkdir ${temp}
+    cp "${submission}"* ${temp}/
+    cp config/test_input/* ${temp}/
     if  [[ -d "config/custom_validation_code" ]]
     then
-      cp config/custom_validation_code/grader.py tmp/
-      cp config/custom_validation_code/custom_validator_input.json tmp/
+      cp config/custom_validation_code/grader.py ${temp}/
+      cp config/custom_validation_code/custom_validator_input.json ${temp}/
     fi
 
     # Execute test
-    cd tmp || exit
+    cd ${temp} || exit
+    export PIPENV_PIPFILE=../../../Pipfile
     pipenv run python grade_submitty.py 1> STDOUT.txt 2> STDERR.txt
     status=$?
 
@@ -86,13 +89,13 @@ do
 
     # clean up
     cd .. || exit
-    rm -rf tmp
+    rm -rf ${temp}
 
   # end of submission
   done
 
   # Move back up to project root.
-  cd .. || exit
+  cd ../.. || exit
 
 # end of example
 done
